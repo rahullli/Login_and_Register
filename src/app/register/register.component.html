@@ -1,0 +1,154 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container login-container border border-success">
+  <div class="row border border-danger">
+    <div class="col-md-6">
+      <h3 class="text-center">Register</h3>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" action="Register">
+
+        <!-- First Row  -->
+
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Email  -->
+            <h6>First Name<span style="color: red;">*</span></h6>
+            <div class="form-group">
+              <input type="text" placeholder="Enter First Name" required formControlName="firstName"
+                class="form-control"
+                [ngClass]="{error: submitted || f['firstName'].touched && getControl('firstName').errors}">
+              <div *ngIf="(submitted || f['firstName'].touched) && f['firstName'].errors" class="text-danger small">
+                <span *ngIf="f['firstName'].errors?.['required']">First Name is required</span>
+                <span *ngIf="f['firstName'].errors?.['minlength'] || f['firstName'].errors?.['maxlength']">First Name
+                  should
+                  contain atleast 3 characters</span>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Phone Number  -->
+          <div class="col-md-6">
+            <h6>Last Name<span style="color: red;">*</span></h6>
+              <div class="form-group">
+                <input type="text" placeholder="Enter Last Name" required formControlName="lastName"
+                  class="form-control"
+                  [ngClass]="{error: submitted || f['lastName'].touched && getControl('lastName').errors}">
+
+                <div *ngIf="(submitted || f['lastName'].touched) && f['lastName'].errors" class="text-danger small">
+                  <span *ngIf="f['lastName'].errors?.['required']">Last Name is required</span>
+                  <span *ngIf="f['lastName'].errors?.['minlength'] || f['lastName'].errors?.['maxlength']">Last Name
+                    should
+                    contain atleast 3 characters</span>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+        <!-- Second  Row  -->
+        <div class="row">
+          <div class="col-md-13">
+            <!-- Email  -->
+            <h6>Email<span style="color: red;">*</span></h6>
+            
+            <div class="form-group">
+              <input type="email" placeholder="Enter your email" required formControlName="emailId" class="form-control"
+                [ngClass]="{error: submitted || f['emailId'].touched && getControl('emailId').errors}">
+              <div *ngIf="(submitted || f['emailId'].touched) && f['emailId'].errors" class="text-danger small">
+                <span *ngIf="f['emailId'].errors?.['required']">Email Id is required</span>
+                <span *ngIf="f['emailId'].errors?.['pattern']">Please enter valid Email Id</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Third Row  -->
+        <div class="row">
+          <div class="col-md-6">
+            <h6>Password<span style="color: red;">*</span></h6>
+            <div class="form-group">
+              <input type="text" placeholder="Enter your password" required formControlName="password" class="form-control" [ngClass]="{error: submitted ||  f['password'].touched
+              && getControl('password').errors
+
+          }">
+              <div *ngIf="(submitted || f['password'].touched) && f['password'].errors" class="text-danger small">
+                <span *ngIf="f['password'].errors?.['required']">Password is required</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h6>Confirm Password<span style="color: red;">*</span></h6>
+            <div class="form-group">
+              <input type="text" placeholder="Confirm your password" required formControlName="confirmPassword" class="form-control"
+                [ngClass]="{error: submitted || f['confirmPassword'].touched
+                && getControl('confirmPassword').errors
+ 
+            }">
+              <div *ngIf="(submitted || f['confirmPassword'].touched) && f['confirmPassword'].errors"
+                class="text-danger small">
+                <span *ngIf=" f['confirmPassword'].errors?.['required']">Confirm Password is required</span>
+                <span *ngIf=" f['confirmPassword'].errors['notmatched']">Password and Confirm Password doesn't match
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- 2nd Row -->
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Password  -->
+            <h6>Date Of Birth<span style="color: red;">*</span></h6>
+              <div class="form-group">
+                <input type="date" required formControlName="dateOfBirth" class="form-control" [ngClass]="{error: submitted ||  f['dateOfBirth'].touched
+                && getControl('contactNo').errors
+ 
+            }">
+                <div *ngIf="(submitted || f['dateOfBirth'].touched) && f['dateOfBirth'].errors" class="text-danger small">
+                  <span *ngIf="f['dateOfBirth'].errors?.['required']">Date of Birth is Required</span>
+                  <span *ngIf=" f['dateOfBirth'].errors['notmatched']">Password and Confirm Password doesn't match </span>
+                </div>
+              </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <h6>Gender<span style="color: red;">*</span></h6>
+            <div class="form-group">
+              <select class="form-select" formControlName="gender"
+              [ngClass]="{error: submitted || f['gender'].touched && getControl('gender').errors}">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+            </select>
+            <div *ngIf="(submitted || f['gender'].touched) && f['gender'].errors" class="text-danger small">
+              <span *ngIf="f['gender'].errors?.['required']">Gender is required</span>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <span class="shake" *ngIf="duplicateStatus">Mobile No Or Email ID Already Present </span>
+          <button class="button">
+            Register 
+          </button>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-md-6">
+      <img style="width: 514px; height: 450px;"
+        src="https://img.freepik.com/free-vector/flat-people-order-food-online-grocery-shopping-from-mobile-application-internet-purchases-with-home-delivery-from-supermarket-store-smartphone-screen-with-buy-button-basket-full-products_88138-856.jpg?w=1380&t=st=1695627560~exp=1695628160~hmac=f662e297f18ce4dc88f2dc0da53e3c0fe593b28bf0e67dfdef065dbacfe42b3e"
+        alt="">
+    </div>
+  </div>
+</div>
